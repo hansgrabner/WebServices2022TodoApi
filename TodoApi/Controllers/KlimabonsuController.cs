@@ -40,7 +40,7 @@ namespace TodoApi.Controllers
         {
             //starke Abhängigkeit auf KlimabonsuCalculatorService - strong dependency
             //Lösung DI - Dependency Injection - Service-Klasse wird von Runtime zur Verfügung gesellt
-           // KlimabonusCalculatorService _calculator = new KlimabonusCalculatorService();
+            // KlimabonusCalculatorService _calculator = new KlimabonusCalculatorService();
 
             /*
             IKlimabonusCalculatorService _calculator =new KlimabonusCalculatorService();
@@ -48,6 +48,20 @@ namespace TodoApi.Controllers
             _calculator = new KlimabonusCalculatorServiceSteiermark();
             */
 
+            string apiKey = Request.Headers["APIKey"];
+
+
+            //Authenitifiierung
+            if (apiKey!="GeldFuerDieUmwelt")
+                return Unauthorized();
+
+
+            //Autorisierung anhand der Identity
+            /*
+            if (User=="Admin")
+                if (User="Johann")
+
+            */
 
             double ergebnis = _calculator.CalcKlimabonus(request);
 
