@@ -35,6 +35,7 @@ namespace TodoApi.Controllers
 
         // POST api/<KlimabonsuController>
         [HttpPost]
+        [Route("/Klimabonusberechnung")]
         public ActionResult Post([FromBody] KlimabonusRequest request)
         {
             //starke Abhängigkeit auf KlimabonsuCalculatorService - strong dependency
