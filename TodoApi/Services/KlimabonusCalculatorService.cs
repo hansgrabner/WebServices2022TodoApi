@@ -52,7 +52,7 @@ namespace TodoApi.Services
             if (request.Alter < 20)
                 ergebnis = 200;
             else
-                ergebnis = 250;
+                ergebnis = 900;
             return ergebnis;
         }
     }

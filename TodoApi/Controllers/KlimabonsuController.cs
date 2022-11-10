@@ -10,12 +10,14 @@ namespace TodoApi.Controllers
     public class KlimabonsuController : ControllerBase
     {
 
-        IKlimabonusCalculatorService _calculator;
+        private readonly IKlimabonusCalculatorService _calculator;
+        private readonly IConfiguration _configuration;
 
         //Constructor Injection
-        public KlimabonsuController(IKlimabonusCalculatorService calculator)
+        public KlimabonsuController(IKlimabonusCalculatorService calculator, IConfiguration configuration)
         {
             _calculator = calculator;
+            _configuration = configuration;
         }
         // GET: api/<KlimabonsuController>
         [HttpGet]
@@ -47,6 +49,15 @@ namespace TodoApi.Controllers
 
 
             double ergebnis = _calculator.CalcKlimabonus(request);
+
+            string maxBetragAusconfig = _configuration["MaxBetrag"];
+            //double maxBetrag = 700;
+            double maxBetrag = Double.Parse(maxBetragAusconfig);
+
+
+
+            if (ergebnis > maxBetrag)
+                ergebnis = maxBetrag;
 
             return Ok(ergebnis);
         }
